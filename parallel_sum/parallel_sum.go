@@ -15,13 +15,13 @@ func main() {
 
 	mid := len(s) / 2
 
-	leftSum := make(chan int) // what if we don't make (chan int)
-	rightSum := make(chan int)
+	leftSum := make(chan int)  // what if we don't make (chan int)
+	rightSum := make(chan int) // making pipes
 
 	go sum(s[:mid], leftSum) // Start two new goroutines. Paralel
 	go sum(s[mid:], rightSum)
 
-	x := <-leftSum // why not x <- leftSum?
+	x := <-leftSum // why not x <- leftSum? x가 문법적으로 channel 일떄 OK(x is variable)
 	y := <-rightSum
 
 	fmt.Println(x, y, x+y)
